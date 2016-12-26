@@ -11,7 +11,7 @@ namespace Tumblin.Web
         public TumblinModule(PostRepository repository)
         {
             Get["/"] = _ => "Hello";
-            Get["/api/posts"] = _ => Response.AsJson(repository.Find());
+            Get["/api/posts", true] = async (_, ct) => Response.AsJson(await repository.Find());
         }
     }
 }
