@@ -17,12 +17,11 @@ namespace Tumblin.Web
         {
             connectionString = WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             existingContainer.Bind<Func<System.Data.IDbConnection>>().ToMethod(x => Connect);
-            // existingContainer.Bind<PostRepository>().To<PostRepository>();
         }
 
         protected override void ConfigureRequestContainer(IKernel container, NancyContext context)
         {
-            container.Bind<PostRepository>().To<PostRepository>();
+            container.Bind<IRepository<Models.Post>>().To<PostRepository>();
             container.Bind<System.Data.IDbTransaction>().ToMethod(x => Connect().BeginTransaction()).InSingletonScope();
         }
         System.Data.IDbConnection Connect()

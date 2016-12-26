@@ -9,7 +9,7 @@ using Dapper;
 namespace Tumblin.Web
 {
 
-    public class PostRepository
+    public class PostRepository: IRepository<Models.Post>
     {
         private IDbTransaction tx;
 

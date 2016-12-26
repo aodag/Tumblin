@@ -9,7 +9,7 @@ namespace Tumblin.Web
 {
     public class TumblinModule: NancyModule
     {
-        public TumblinModule(System.Data.IDbTransaction tx, PostRepository repository)
+        public TumblinModule(System.Data.IDbTransaction tx, IRepository<Models.Post> repository)
         {
             After += ctx => tx.Commit();
             Get["/"] = _ => "Hello";
