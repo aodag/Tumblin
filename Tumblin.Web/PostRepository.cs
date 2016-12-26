@@ -18,42 +18,41 @@ namespace Tumblin.Web
             this.tx = tx;
         }
 
-        private IDbConnection Connect()
+        private IDbConnection Connection
         {
-            return tx.Connection;
+            get
+            {
+                return tx.Connection;
+            }
         }
 
         public async Task<Models.Post> Get(int id)
         {
-            using (var conn = Connect())
-            {
-                return await conn.QueryFirstAsync<Models.Post>("SELECT id Id, title Title, text Text FROM posts WHERE id = @id", new { id = id });
-            }
+            return await Connection.QueryFirstAsync<Models.Post>("SELECT id Id, title Title, text Text FROM posts WHERE id = @id", new { id = id });
         }
 
         public async Task<IEnumerable<Models.Post>> Find()
         {
-            using (var conn = Connect())
-            {
-                return await conn.QueryAsync<Models.Post>("SELECT id Id, title Title, text Text FROM posts");
-            }
+            return await Connection.QueryAsync<Models.Post>("SELECT id Id, title Title, text Text FROM posts");
         }
 
         public async Task<Models.Post> Add(Models.Post post)
         {
-            using (var conn = Connect())
-            {
-                var affected = await conn.ExecuteAsync("INSERT INTO posts (title, text) VALUES (@Title, @Text)", post);
-                var id = await conn.ExecuteScalarAsync<int>("SELECT last_insert_id()");
-                post.Id = id;
-                tx.Commit();
-            }
+            var affected = await Connection.ExecuteAsync("INSERT INTO posts (title, text) VALUES (@Title, @Text)", post);
+            var id = await Connection.ExecuteScalarAsync<int>("SELECT last_insert_id()");
+            post.Id = id;
             return post;
         }
 
-        public void Remove(Models.Post post)
+        public async Task Remove(int id)
         {
+            await Connection.ExecuteAsync("DELETE FROM posts WHERE id = @Id", new { Id = id });
+        }
 
+        public async Task<Models.Post> Update(Models.Post post)
+        {
+            await Connection.ExecuteAsync("UPDATE posts SET title = @Title, text = @Text WHERE id = @Id", post);
+            return post;
         }
     }
 }
