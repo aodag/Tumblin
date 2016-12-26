@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
+using Nancy;
 using Nancy.Bootstrappers.Ninject;
 using Ninject;
 
@@ -16,12 +17,19 @@ namespace Tumblin.Web
         {
             connectionString = WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             existingContainer.Bind<Func<System.Data.IDbConnection>>().ToMethod(x => Connect);
-            existingContainer.Bind<PostRepository>().To<PostRepository>();
+            // existingContainer.Bind<PostRepository>().To<PostRepository>();
         }
 
+        protected override void ConfigureRequestContainer(IKernel container, NancyContext context)
+        {
+            container.Bind<PostRepository>().To<PostRepository>();
+            container.Bind<System.Data.IDbTransaction>().ToMethod(x => Connect().BeginTransaction()).InSingletonScope();
+        }
         System.Data.IDbConnection Connect()
         {
-            return new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            var mySqlConnection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            mySqlConnection.Open();
+            return mySqlConnection;
         }
     }
 }

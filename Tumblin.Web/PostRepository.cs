@@ -11,18 +11,16 @@ namespace Tumblin.Web
 
     public class PostRepository
     {
-        private Func<IDbConnection> connectionFactory;
+        private IDbTransaction tx;
 
-        public PostRepository(Func<IDbConnection> connectionFactory)
+        public PostRepository(IDbTransaction tx)
         {
-            this.connectionFactory = connectionFactory;
+            this.tx = tx;
         }
 
         private IDbConnection Connect()
         {
-            var conn = connectionFactory.Invoke();
-            conn.Open();
-            return conn;
+            return tx.Connection;
         }
 
         public async Task<Models.Post> Get(int id)
@@ -33,7 +31,7 @@ namespace Tumblin.Web
             }
         }
 
-        public async Task<IEnumerable <Models.Post>> Find()
+        public async Task<IEnumerable<Models.Post>> Find()
         {
             using (var conn = Connect())
             {
@@ -41,12 +39,16 @@ namespace Tumblin.Web
             }
         }
 
-        public async void Add(Models.Post post)
+        public async Task<Models.Post> Add(Models.Post post)
         {
             using (var conn = Connect())
             {
                 var affected = await conn.ExecuteAsync("INSERT INTO posts (title, text) VALUES (@Title, @Text)", post);
+                var id = await conn.ExecuteScalarAsync<int>("SELECT last_insert_id()");
+                post.Id = id;
+                tx.Commit();
             }
+            return post;
         }
 
         public void Remove(Models.Post post)
