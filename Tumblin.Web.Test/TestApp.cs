@@ -17,6 +17,7 @@ namespace Tumblin.Web.Test
             var bootstrapper = new TumblinBootstrapper();
             var browser = new Nancy.Testing.Browser(bootstrapper);
             var response = browser.Get("/api/posts");
+            Assert.AreEqual(Nancy.HttpStatusCode.OK, response.StatusCode);
         }
 
         [Test]
