@@ -3,8 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{19794BE4-F8BA-4863-9B2C-0C1FA5D197FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tumblin.Web", "Tumblin.Web\Tumblin.Web.csproj", "{C4D32C7E-F361-4ACD-9CC6-EB68ECD7BA18}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4D32C7E-F361-4ACD-9CC6-EB68ECD7BA18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D32C7E-F361-4ACD-9CC6-EB68ECD7BA18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D32C7E-F361-4ACD-9CC6-EB68ECD7BA18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D32C7E-F361-4ACD-9CC6-EB68ECD7BA18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C4D32C7E-F361-4ACD-9CC6-EB68ECD7BA18} = {19794BE4-F8BA-4863-9B2C-0C1FA5D197FD}
 	EndGlobalSection
 EndGlobal
