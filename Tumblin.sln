@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{19794BE4-F8B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tumblin.Web", "Tumblin.Web\Tumblin.Web.csproj", "{C4D32C7E-F361-4ACD-9CC6-EB68ECD7BA18}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{33A10E21-295D-4579-A200-3BF12788CC6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tumblin.Web.Test", "Tumblin.Web.Test\Tumblin.Web.Test.csproj", "{1B8A7F36-F4F7-42B1-8CFE-4B4F0E244B1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +21,16 @@ Global
 		{C4D32C7E-F361-4ACD-9CC6-EB68ECD7BA18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4D32C7E-F361-4ACD-9CC6-EB68ECD7BA18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4D32C7E-F361-4ACD-9CC6-EB68ECD7BA18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B8A7F36-F4F7-42B1-8CFE-4B4F0E244B1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B8A7F36-F4F7-42B1-8CFE-4B4F0E244B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B8A7F36-F4F7-42B1-8CFE-4B4F0E244B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B8A7F36-F4F7-42B1-8CFE-4B4F0E244B1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C4D32C7E-F361-4ACD-9CC6-EB68ECD7BA18} = {19794BE4-F8BA-4863-9B2C-0C1FA5D197FD}
+		{1B8A7F36-F4F7-42B1-8CFE-4B4F0E244B1C} = {33A10E21-295D-4579-A200-3BF12788CC6A}
 	EndGlobalSection
 EndGlobal
