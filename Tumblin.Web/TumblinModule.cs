@@ -8,9 +8,10 @@ namespace Tumblin.Web
 {
     public class TumblinModule: NancyModule
     {
-        public TumblinModule()
+        public TumblinModule(PostRepository repository)
         {
             Get["/"] = _ => "Hello";
+            Get["/api/posts"] = _ => Response.AsJson(repository.Find());
         }
     }
 }
