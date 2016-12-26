@@ -105,6 +105,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="sql\posts.sql" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
