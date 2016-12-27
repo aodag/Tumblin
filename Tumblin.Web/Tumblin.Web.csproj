@@ -108,11 +108,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="sql\posts.sql" />
+    <EmbeddedResource Include="sql\images.sql" />
+    <EmbeddedResource Include="sql\dropall.sql" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImageModule.cs" />
+    <Compile Include="ImageRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostImage.cs" />
     <Compile Include="PostRepository.cs" />
     <Compile Include="PostsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

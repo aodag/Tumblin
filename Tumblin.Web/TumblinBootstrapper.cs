@@ -22,6 +22,7 @@ namespace Tumblin.Web
         protected override void ConfigureRequestContainer(IKernel container, NancyContext context)
         {
             container.Bind<IRepository<Models.Post>>().To<PostRepository>();
+            container.Bind<IRepository<Models.PostImage>>().To<ImageRepository>();
             container.Bind<System.Data.IDbTransaction>().ToMethod(x => Connect().BeginTransaction()).InSingletonScope();
         }
         System.Data.IDbConnection Connect()

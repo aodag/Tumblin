@@ -18,15 +18,19 @@ namespace Tumblin.Web.Test
         {
             var connectionSettings = ConfigurationManager.ConnectionStrings["DefaultConnection"];
             var assemblyUnderTest = System.Reflection.Assembly.GetAssembly(typeof(TumblinBootstrapper));
-            using (var sql = new StreamReader(assemblyUnderTest.GetManifestResourceStream("Tumblin.Web.sql.posts.sql")))
+            using (var conn = new MySql.Data.MySqlClient.MySqlConnection(connectionSettings.ConnectionString))
             {
-                var stmt = sql.ReadToEnd();
-                using (var conn = new MySql.Data.MySqlClient.MySqlConnection(connectionSettings.ConnectionString))
+                conn.Open();
+                foreach (var resourceName in new string[] { "Tumblin.Web.sql.dropall.sql", "Tumblin.Web.sql.posts.sql", "Tumblin.Web.sql.images.sql" })
                 {
-                    conn.Open();
-                    var command = conn.CreateCommand();
-                    command.CommandText = stmt;
-                    command.ExecuteNonQuery();
+                    using (var sql = new StreamReader(assemblyUnderTest.GetManifestResourceStream(resourceName)))
+                    {
+                        var stmt = sql.ReadToEnd();
+                            var command = conn.CreateCommand();
+                            command.CommandText = stmt;
+                            command.ExecuteNonQuery();
+                    }
+
                 }
             }
         }
@@ -85,9 +89,6 @@ namespace Tumblin.Web.Test
         {
             var connectionSettings = ConfigurationManager.ConnectionStrings["DefaultConnection"];
             Assert.NotNull(connectionSettings);
-            var assemblyUnderTest = System.Reflection.Assembly.GetAssembly(typeof(TumblinBootstrapper));
-            var names = assemblyUnderTest.GetManifestResourceNames();
-            Assert.AreEqual(new string[] { "Tumblin.Web.sql.posts.sql" }, names);
         }
     }
 }

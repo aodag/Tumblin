@@ -33,7 +33,12 @@ namespace Tumblin.Web
 
         public async Task<IEnumerable<Models.Post>> Find()
         {
-            return await Connection.QueryAsync<Models.Post>("SELECT id Id, title Title, text Text FROM posts");
+            return await Connection.QueryAsync<Models.Post>(
+                @"SELECT posts.id Id, posts.title Title, posts.text Text, images.id ImageId
+FROM posts
+LEFT JOIN images
+ON images.post_id = posts.id
+");
         }
 
         public async Task<Models.Post> Add(Models.Post post)

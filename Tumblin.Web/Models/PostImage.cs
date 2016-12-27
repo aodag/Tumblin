@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Tumblin.Web.Models
 {
-    public class Post
+    public class PostImage
     {
         public int Id
         {
@@ -13,19 +13,13 @@ namespace Tumblin.Web.Models
             set;
         }
 
-        public string Title
-        {
-            get;
-            set;
-        }
-        
-        public string Text
+        public byte[] Data
         {
             get;
             set;
         }
 
-        public int? ImageId
+        public Post Post
         {
             get;
             set;
